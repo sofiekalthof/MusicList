@@ -2,7 +2,7 @@
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 body {
-    background: linear-gradient(to bottom, #7474d8, #1230a9, #814497);
+    background: linear-gradient(to bottom, #8EE4AF, #379683, #05386B);
     margin: 0; 
     padding: 0 20px;
     min-height: 715px;
