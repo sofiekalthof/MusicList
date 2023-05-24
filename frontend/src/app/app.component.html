@@ -1,0 +1,77 @@
+<div class="content">
+  <div class="container">
+    <mat-toolbar color="primary">
+      <span>List of my favorite Music</span>
+    </mat-toolbar>
+    <mat-card *ngIf="music != null">
+      <table mat-table [dataSource]="music" class="mat-elevation-z8">
+        <!-- title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> Title </th>
+          <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        </ng-container>
+
+        <!-- category Column -->
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef> Category </th>
+          <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+        </ng-container>
+
+        <!-- url Column -->
+        <ng-container matColumnDef="url">
+          <th mat-header-cell *matHeaderCellDef> Url </th>
+          <td mat-cell *matCellDef="let element"> <a href={{element.url}} > {{element.url}}</a></td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="editMusic(element)" color="primary">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteMusic(element)" color="primary">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <div *ngIf="editingMusic" style="display: flex; justify-content: left; padding-bottom: 20px;">
+       <div style="width: 100%; max-width: 500px; display: flex ; flex-direction: column; justify-content: stretch">
+          <table class="example-full-width" cellspacing="0"><tr>
+          <td><mat-form-field class="example-full-width" >
+            <mat-label>Title</mat-label>
+            <input matInput [value]="editingMusic.title" (change)="titleChanged($event.target)">
+          </mat-form-field></td>
+          <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Category</mat-label>
+            <input matInput [value]="editingMusic.category" (change)="categoryChanged($event.target)">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="example-full-width" >
+            <mat-label>Url</mat-label>
+            <input matInput [value]="editingMusic.url" (change)="urlChanged($event.target)">
+          </mat-form-field>
+        </td>
+       <td>
+          <button mat-button (click)="doneEditing()" color="primary">Save</button>
+        </td>
+        </tr>
+      </table>
+        </div>
+      </div>
+
+      <mat-card-actions>
+        <button mat-raised-button (click)="addMusic()" color="primary">Add new music</button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card *ngElse>
+      Loading...
+    </mat-card>
+  </div>
+</div>
