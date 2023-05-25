@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const cors = require("cors");
 const MongoClient = require("mongodb").MongoClient;
@@ -21,7 +22,7 @@ const dbName = "mean-musiclist";
 const collectionName = "musiclist";
 
 // database connection string
-const dbUrl = 'mongodb+srv://Sofie:bgtqlt3qPp6Pith9@meanstacktestcluster.4s1iu9n.mongodb.net/?retryWrites=true&w=majority'
+const dbUrl = process.env.MONGO_URL
 
 
 let dbConnection;
