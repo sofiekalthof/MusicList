@@ -3,8 +3,6 @@ const express = require("express");
 const cors = require("cors");
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectId;
-// import Password interface
-// import { Password } from "./password";
 
 // Create Express app
 const app = express();
