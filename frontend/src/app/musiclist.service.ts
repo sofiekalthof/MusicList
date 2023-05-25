@@ -7,11 +7,12 @@ import { Music } from './models/music';
 })
 export class MusicListService {
 
-  private apiurl = "http://localhost:3600"
+  private apiurl = 'https://musiclistbackend.onrender.com';
 
   constructor(private http: HttpClient) { }
 
   listMusic() {
+    console.log(this.apiurl);
     return this.http.get<Music[]>(`${this.apiurl}/music`);
   }
 
