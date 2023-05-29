@@ -16,11 +16,11 @@ app.use(express.json());
 // Initialize parameters
 // const port = eval("process.env.PORT") || 3600;
 const port = 3600;
-const dbName = "mean-musiclist";
-const collectionName = "musiclist";
+const dbName = process.env.DB_NAME;
+const collectionName = process.env.DB_COLLECTION;
 
 // database connection string
-const dbUrl = process.env.MONGO_URL
+const dbUrl = process.env.MONGODB_URL;
 
 
 let dbConnection;
