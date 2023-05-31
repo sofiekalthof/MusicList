@@ -28,8 +28,10 @@ export class MusicListService {
   updateMusic(id: string, music: Music) {
     return this.http.put(`${this.apiurl}/music/${id}`, music);
   }
-
+  
+  // Task 3.1 Starts here
   deleteMusic(id: string) {
     return this.http.delete(`${this.apiurl}/music/${id}`);
   }
+  // Task 3.1 Ends here
 }
