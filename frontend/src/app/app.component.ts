@@ -13,14 +13,14 @@ export class AppComponent implements OnInit {
   music: Music[] | null = null;
   editingMusic: Music | null = null;
 
-  constructor(private musicService: MusicListService) {}
+  constructor(private musicListService: MusicListService) {}
 
   ngOnInit() {
     this.updateMusicList();
   }
 
   updateMusicList() {
-    this.musicService.listMusic()
+    this.musicListService.listMusic()
       .subscribe((music: Music[]) => {
         this.music = music;
       });
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
       url: ""
     };
 
-    this.musicService.createMusic(newMusic)
+    this.musicListService.createMusic(newMusic)
       .subscribe((data: any) => {
         this.updateMusicList();
         this.editingMusic = {
@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
   }
 
   updateMusic(music: Music) {
-    this.musicService.updateMusic(music._id!, { ...music, _id: undefined })
+    this.musicListService.updateMusic(music._id!, { ...music, _id: undefined })
       .subscribe(() => {
         this.updateMusicList();
       });
@@ -65,7 +65,7 @@ export class AppComponent implements OnInit {
 
   // TASK 3.3 START
   deleteMusic(music: Music) {
-    this.musicService.deleteMusic(music._id!)
+    this.musicListService.deleteMusic(music._id!)
       .subscribe(() => {
         this.updateMusicList();
       });

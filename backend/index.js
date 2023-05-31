@@ -26,23 +26,24 @@ const dbUrl = process.env.MONGODB_URL;
 let dbConnection;
 
 // Define server routes
-// List all passwords
 // TODO: Task - Write whole GET Request
 app.route("/music").get(async (req, res) => {
-    let passwords = [];
+    let music = [];
   
-    passwords = await dbConnection.collection(collectionName)
+    music = await dbConnection
+                            .collection(collectionName)
                             .find()
                             .toArray();
 
-    res.json(passwords);
+    res.json(music);
 });
 
 // Get a title
 app.route("/music/:id").get(async (req, res) => {
     const id = req.params.id;
-    const result = await dbConnection.collection(collectionName)
-                                        .findOne({_id: new ObjectId(id)});
+    const result = await dbConnection
+                        .collection(collectionName)
+                        .findOne({_id: new ObjectId(id)});
   
     if (!result) {
       res.status(404).json({error: "Could not find"});

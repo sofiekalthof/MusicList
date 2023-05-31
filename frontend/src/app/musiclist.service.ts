@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Music } from './models/music';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MusicListService {
 
-  private apiurl = 'http://localhost:3600';
+  private apiurl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
