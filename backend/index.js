@@ -26,7 +26,7 @@ const dbUrl = process.env.MONGODB_URL;
 let dbConnection;
 
 // Define server routes
-// TODO: Task - Write whole GET Request
+// Task 2.2 Starts here
 app.route("/music").get(async (req, res) => {
     let music = [];
   
@@ -37,6 +37,7 @@ app.route("/music").get(async (req, res) => {
 
     res.json(music);
 });
+// Task 2.2 Ends here
 
 // Get a title
 app.route("/music/:id").get(async (req, res) => {
@@ -84,9 +85,11 @@ app.route("/music/:id").put(async (req, res) => {
 app.route("/music/:id").delete(async (req, res) => {
     const id = req.params.id;
   
-    // TODO: Task - Write delete query only
+    // Task 2.1 Starts here
     await dbConnection.collection(collectionName)
                         .deleteOne({ _id: new ObjectId(id) });
+    
+    // Task 2.2 Ends here
   
     res.json({});
   });
