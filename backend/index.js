@@ -14,7 +14,6 @@ app.use(cors());
 app.use(express.json());
 
 // Initialize parameters
-// const port = eval("process.env.PORT") || 3600;
 const port = 3600;
 const dbName = process.env.DB_NAME;
 const collectionName = process.env.DB_COLLECTION;
@@ -61,7 +60,7 @@ app.route("/music").get(async (req, res) => {
     try {
       let music = [];
       music = await musicListModel.find({});
-
+      
       res.status(201).json(music);
     } catch(err) {
       res.status(500).json(err);
@@ -74,7 +73,7 @@ app.route("/music/:id").get(async (req, res) => {
     const id = req.params.id;
 
     try {
-      const result = await musicListModel.findOne({ _id = new ObjectId(id)});
+      const result = await musicListModel.findOne({ _id: new ObjectId(id)});
 
       if (!result) {
         res.status(404).json({ error: "Could not find music with that title" });
