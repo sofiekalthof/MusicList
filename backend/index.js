@@ -1,8 +1,8 @@
 require('dotenv').config()
 const express = require("express");
 const cors = require("cors");
-const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectId;
+const mongoose = require("mongoose");
 
 // Create Express app
 const app = express();
@@ -22,93 +22,120 @@ const collectionName = process.env.DB_COLLECTION;
 // database connection string
 const dbUrl = process.env.MONGODB_URL;
 
+// create database connection
+mongoose.connect(dbUrl, {
+  dbName: dbName
+  })
+  .then(() => {
+    console.log("Connected to DB");
+    // start listening to the port
+    app.listen(port, () => {
+      console.log("Listening on " + port + ".");
+    });  
+  })
+  .catch((err) => {
+    console.log("Error connecting to DB", err);
+  });
 
-let dbConnection;
+// schema for music list​
+const musicListSchema= new mongoose.Schema({
+  category: {
+    type: String
+  },
+  title: {
+    type: String,
+    required: true
+  },
+  url: {
+    type: String,
+    required: true
+  }
+});
+
+// create model from schema
+const musicListModel = mongoose.model(collectionName, schema=musicListSchema);
 
 // Define server routes
 // Task 2.2 Starts here
 app.route("/music").get(async (req, res) => {
-    let music = [];
-  
-    music = await dbConnection
-                            .collection(collectionName)
-                            .find()
-                            .toArray();
+    try {
+      let music = [];
+      music = await musicListModel.find({});
 
-    res.status(201).json(music);
+      res.status(201).json(music);
+    } catch(err) {
+      res.status(500).json(err);
+    }
 });
 // Task 2.2 Ends here
 
 // Get a title
 app.route("/music/:id").get(async (req, res) => {
     const id = req.params.id;
-    const result = await dbConnection
-                        .collection(collectionName)
-                        .findOne({_id: new ObjectId(id)});
-  
-    if (!result) {
-      res.status(404).json({ error: "Could not find music with that title" });
-      return;
+
+    try {
+      const result = await musicListModel.findOne({ _id = new ObjectId(id)});
+
+      if (!result) {
+        res.status(404).json({ error: "Could not find music with that title" });
+        return;
+      }
+
+      res.status(201).json(result);
+    } catch(err) {
+      res.status(500).json(err);
     }
-  
-    res.status(201).json(result);
 });
 
 // Create a new title
 app.route("/music").post(async (req, res) => {
     const doc = req.body;
-    const result = await dbConnection.collection(collectionName)
-                                        .insertOne(doc);
-    res.status(201).json({ _id: result.insertedId });
-  });
+
+    try {
+      const newDoc = musicListModel(doc);
+      const result = await newDoc.save();
+
+      res.status(201).json({ _id: result.insertedId });
+    } catch(err) {
+      res.status(500).json(err);
+    } 
+});
 
 // Update a title
 app.route("/music/:id").put(async (req, res) => {
     const id = req.params.id;
     const doc = req.body;
 
-    // make sure the id field is correct object type
-    doc._id = new ObjectId(id);
-
-    const result = await dbConnection.collection(collectionName)
-                                        .updateOne({ _id: new ObjectId(id) }, { $set: doc });
-  
-    if (result.matchedCount == 0) {
-      res.status(404).json({ error: "could not find the music to update" });
-      return;
-    }
-  
-    res.status(201).json(result);
-  });
+    try {
+      const result = await musicListModel.findByIdAndUpdate(id, doc);
+    
+      if (result.matchedCount == 0) {
+        res.status(404).json({ error: "could not find the music to update" });
+        return;
+      }
+    
+      res.status(201).json(result);
+    } catch(err) {
+      res.status(500).json(err);
+    } 
+});
 
   // Delete a title
 app.route("/music/:id").delete(async (req, res) => {
     const id = req.params.id;
   
+    try {
     // Task 2.1 Starts here
-    const result = await dbConnection.colection(collectionName)
-                                        .deleteOne({ _id: new ObjectId(id) });
-    
+    const result = await musicListModel.findByIdAndDelete(id);
+
     // Task 2.2 Ends here
     if (!result) {
       res.status(404).json({ error: "Could not find music to delete" });
       return;
     }
-  
+
     res.status(201).json(result);
-  });
-
-  
-// Start server and listen for requests
-app.listen(port, function () {
-    console.log("Listening on " + port + ".");
-  });
-
-// database connection
-MongoClient.connect(dbUrl)
-  .then(client => {
-    dbConnection = client.db(dbName)
-  })
-  .catch(err => {
-    console.log(err)
-  })
+    } catch(err) {
+      res.status(500).json(err);
+    } 
+});
