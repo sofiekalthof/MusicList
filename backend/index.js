@@ -58,10 +58,10 @@ const musicListModel = mongoose.model(collectionName, schema=musicListSchema);
 // Task 2.2 Starts here
 app.route("/music").get(async (req, res) => {
     try {
-      let music = [];
-      music = await musicListModel.find({});
+      let musics = [];
+      musics = await musicListModel.find({});
       
-      res.status(201).json(music);
+      res.status(201).json(musics);
     } catch(err) {
       res.status(500).json(err);
     }
