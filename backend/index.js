@@ -35,7 +35,7 @@ app.route("/music").get(async (req, res) => {
                             .find()
                             .toArray();
 
-    res.json(music);
+    res.status(201).json(music);
 });
 // Task 2.2 Ends here
 
@@ -47,11 +47,11 @@ app.route("/music/:id").get(async (req, res) => {
                         .findOne({_id: new ObjectId(id)});
   
     if (!result) {
-      res.status(404).json({error: "Could not find"});
+      res.status(404).json({ error: "Could not find music with that title" });
       return;
     }
   
-    res.json(result);
+    res.status(201).json(result);
 });
 
 // Create a new title
@@ -74,11 +74,11 @@ app.route("/music/:id").put(async (req, res) => {
                                         .updateOne({ _id: new ObjectId(id) }, { $set: doc });
   
     if (result.matchedCount == 0) {
-      res.status(404).json({});
+      res.status(404).json({ error: "could not find the music to update" });
       return;
     }
   
-    res.json({});
+    res.status(201).json(result);
   });
 
   // Delete a title
@@ -86,12 +86,16 @@ app.route("/music/:id").delete(async (req, res) => {
     const id = req.params.id;
   
     // Task 2.1 Starts here
-    await dbConnection.collection(collectionName)
-                        .deleteOne({ _id: new ObjectId(id) });
+    const result = await dbConnection.colection(collectionName)
+                                        .deleteOne({ _id: new ObjectId(id) });
     
     // Task 2.2 Ends here
+    if (!result) {
+      res.status(404).json({ error: "Could not find music to delete" });
+      return;
+    }
   
-    res.json({});
+    res.status(201).json(result);
   });
 
   
