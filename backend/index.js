@@ -52,7 +52,7 @@ const musicListSchema= new mongoose.Schema({
 });
 
 // create model from schema
-const musicListModel = mongoose.model(collectionName, schema=musicListSchema);
+const musicListModel = mongoose.model(collectionName, schema=musicListSchema, collectionName);
 
 // Define server routes
 // Task 2.2 Starts here
