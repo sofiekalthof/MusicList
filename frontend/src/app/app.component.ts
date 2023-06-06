@@ -28,10 +28,9 @@ export class AppComponent implements OnInit {
 
   addMusic() {
     const newMusic: Music = {
-      _id: undefined,
-      category: "",
-      title: "",
-      url: ""
+      category: " ",
+      title: " ",
+      url: " "
     };
 
     this.musicListService.createMusic(newMusic)
