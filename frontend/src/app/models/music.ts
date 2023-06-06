@@ -1,5 +1,5 @@
 export interface Music {
-    _id?: string|undefined;
+    _id?: string;
     category: string;
     title: string;
     url: string;
