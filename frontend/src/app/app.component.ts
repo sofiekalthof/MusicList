@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
   }
 
   updateMusic(music: Music) {
-    this.musicListService.updateMusic(music._id!, { ...music, _id: undefined })
+    this.musicListService.updateMusic(music._id!, music)
       .subscribe(() => {
         this.updateMusicList();
       });

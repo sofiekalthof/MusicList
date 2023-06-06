@@ -50,11 +50,11 @@ app.route("/music/:id").get(async (req, res) => {
 // Create a new music
 app.route("/music").post(async (req, res) => {
     const doc = new musicModel(req.body);
-    console.log(doc);
+
     try {
       await doc.save();
       
-      res.status(201).json({ message: "New music created" });
+      res.status(201).json(doc);
     } catch(err) {
       res.status(500).send(err);
     }

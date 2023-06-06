@@ -19,7 +19,7 @@ const musicSchema = new mongoose.Schema({
 });
 
 // Create model from schema
-let musicModel = mongoose.model(collectionName, schema=musicSchema);
+let musicModel = mongoose.model(collectionName, schema=musicSchema, collectionName);
 
 // Export model
 module.exports = musicModel;

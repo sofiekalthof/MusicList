@@ -13,7 +13,6 @@ export class MusicListService {
   constructor(private http: HttpClient) { }
 
   listMusic() {
-    console.log(this.apiurl);
     return this.http.get<Music[]>(`${this.apiurl}/music`);
   }
 
