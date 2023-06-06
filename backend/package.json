@@ -2,9 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "",
   "scripts": {
-    "build": "npx parcel build index.js"
+    "build": ""
   },
   "keywords": [],
   "author": "",
