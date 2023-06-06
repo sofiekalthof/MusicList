@@ -20,6 +20,7 @@ app.listen(port, () => {
   }); 
 
 // Get all music
+// Task 2.2 Starts here
 app.route("/music").get(async (req, res) => {
     let music = [];
     try{
@@ -29,6 +30,7 @@ app.route("/music").get(async (req, res) => {
       res.status(500).send(err);
     }
 });
+// Task 2.2 Ends here
 
 // Get a specific music title
 app.route("/music/:id").get(async (req, res) => {
@@ -83,7 +85,9 @@ app.route("/music/:id").delete(async (req, res) => {
     const id = req.params.id;
 
     try {
+    // Task 2.1 Starts here
       const result = await musicModel.findByIdAndDelete(id);
+    // Task 2.1 Ends here
 
       if (!result) {
         res.status(404).json({ error: "Music not found" });

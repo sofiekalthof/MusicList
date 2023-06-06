@@ -62,14 +62,14 @@ export class AppComponent implements OnInit {
       });
   }
 
-  // TASK 3.2 Starts here
+  // Task 3.2 Starts here
   deleteMusic(music: Music) {
     this.musicListService.deleteMusic(music._id!)
       .subscribe(() => {
         this.updateMusicList();
       });
-  }
-  // TASK 3.2 Ends here
+    }
+  // Task 3.2 Ends here
 
   categoryChanged(target: EventTarget | null) {
     if (!target || !this.editingMusic) return;
