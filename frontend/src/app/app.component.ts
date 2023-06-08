@@ -63,12 +63,7 @@ export class AppComponent implements OnInit {
   }
 
   // Task 3.2 Starts here
-  deleteMusic(music: Music) {
-    this.musicListService.deleteMusic(music._id!)
-      .subscribe(() => {
-        this.updateMusicList();
-      });
-    }
+  
   // Task 3.2 Ends here
 
   categoryChanged(target: EventTarget | null) {
