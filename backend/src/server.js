@@ -21,15 +21,7 @@ app.listen(port, () => {
 
 // Get all music
 // Task 2.2 Starts here
-app.route("/music").get(async (req, res) => {
-    let music = [];
-    try{
-      music = await musicModel.find({});
-      res.status(201).json(music);
-    } catch(err) {
-      res.status(500).send(err);
-    }
-});
+
 // Task 2.2 Ends here
 
 // Get a specific music title
