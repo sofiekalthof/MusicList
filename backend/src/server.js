@@ -78,7 +78,7 @@ app.route("/music/:id").delete(async (req, res) => {
 
     try {
     // Task 2.1 Starts here
-      const result = await musicModel.findByIdAndDelete(id);
+
     // Task 2.1 Ends here
 
       if (!result) {
