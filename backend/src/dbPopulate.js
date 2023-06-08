@@ -16,7 +16,7 @@ async function populateDatabase(){
         
         console.log("Database populated");
     } catch(err) {
-        console.log("Error updating a password", err);
+        console.log("Error populating the database", err);
     }
 }
 
