@@ -27,7 +27,7 @@ app.route("/music").get(async (req, res) => {
       music = await musicModel.find({});
       res.status(201).json(music);
     } catch(err) {
-      res.status(500).send(err);
+      res.status(500).send("Server Error. Request could not be fulfilled.");
     }
 });
 // Task 2.2 Ends here
@@ -45,7 +45,7 @@ app.route("/music/:id").get(async (req, res) => {
       }
       res.status(201).json(result);
     } catch(err) {
-      res.status(500).send(err);
+      res.status(500).send("Server Error. Request could not be fulfilled.");
     }
 });
 
@@ -58,7 +58,7 @@ app.route("/music").post(async (req, res) => {
       
       res.status(201).json(doc);
     } catch(err) {
-      res.status(500).send(err);
+      res.status(500).send("Server Error. Request could not be fulfilled.");
     }
   });
 
@@ -76,7 +76,7 @@ app.route("/music/:id").put(async (req, res) => {
       }
       res.status(201).json(result);
     } catch(err) {
-      res.status(500).send(err);
+      res.status(500).send("Server Error. Request could not be fulfilled.");
     }
   });
 
@@ -94,6 +94,6 @@ app.route("/music/:id").delete(async (req, res) => {
       }
       res.status(201).send(result);
     } catch(err) {
-      res.status(500).send(err);
+      res.status(500).send("Server Error. Request could not be fulfilled.");
     }
   });
