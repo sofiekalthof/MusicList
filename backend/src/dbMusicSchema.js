@@ -6,17 +6,7 @@ const collectionName = process.env.DB_COLLECTION;
 // Create mongoose schema
 const musicSchema = new mongoose.Schema({
     //Task 1.2 Starts here
-    category: {
-        type: String
-    },
-    title: {
-        type: String,
-        required: true
-    },
-    url: {
-        type: String,
-        required: true
-    }
+
     // Task 1.2 Ends here
 })
 
