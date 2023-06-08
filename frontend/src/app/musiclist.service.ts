@@ -29,8 +29,6 @@ export class MusicListService {
   }
   
   // Task 3.1 Starts here
-  deleteMusic(id: string) {
-    return this.http.delete(`${this.apiurl}/music/${id}`);
-  }
+
   // Task 3.1 Ends here
 }
