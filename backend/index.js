@@ -68,7 +68,7 @@ $bd295355364a39aa$var$app.route("/music").get(async (req, res)=>{
         music = await $8f4b427d0f3a62da$exports.find({});
         res.status(201).json(music);
     } catch (err) {
-        res.status(500).send(err);
+        res.status(500).send("Server Error. Request could not be fulfilled.");
     }
 });
 // Task 2.2 Ends here
@@ -85,7 +85,7 @@ $bd295355364a39aa$var$app.route("/music/:id").get(async (req, res)=>{
         }
         res.status(201).json(result);
     } catch (err) {
-        res.status(500).send(err);
+        res.status(500).send("Server Error. Request could not be fulfilled.");
     }
 });
 // Create a new music
@@ -95,7 +95,7 @@ $bd295355364a39aa$var$app.route("/music").post(async (req, res)=>{
         await doc.save();
         res.status(201).json(doc);
     } catch (err) {
-        res.status(500).send(err);
+        res.status(500).send("Server Error. Request could not be fulfilled.");
     }
 });
 // Update music
@@ -112,7 +112,7 @@ $bd295355364a39aa$var$app.route("/music/:id").put(async (req, res)=>{
         }
         res.status(201).json(result);
     } catch (err) {
-        res.status(500).send(err);
+        res.status(500).send("Server Error. Request could not be fulfilled.");
     }
 });
 // Delete music
@@ -127,7 +127,7 @@ $bd295355364a39aa$var$app.route("/music/:id").delete(async (req, res)=>{
         });
         res.status(201).send(result);
     } catch (err) {
-        res.status(500).send(err);
+        res.status(500).send("Server Error. Request could not be fulfilled.");
     }
 });
 
