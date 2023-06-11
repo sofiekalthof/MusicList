@@ -1,0 +1,79 @@
+// Task 1.1 Starts here
+MONGODB_URL = 'mongodb+srv://Sofie:bgtqlt3qPp6Pith9@meanstacktestcluster.4s1iu9n.mongodb.net/?retryWrites=true&w=majority'
+DB_NAME = "mean-musiclist"
+DB_COLLECTION = "musiclist"
+// Task 1.1 Ends here
+
+// Create mongoose schema
+const musicSchema = new mongoose.Schema({
+    //Task 1.2 Starts here
+    category: {
+        type: String
+    },
+    title: {
+        type: String,
+        required: true
+    },
+    url: {
+        type: String,
+        required: true
+    }
+    // Task 1.2 Ends here
+})
+
+// Task 1.3 Starts here
+const exampleMusicList = [
+    {"category": "rock", "title": "It's My Life", "url": "https://www.youtube.com/watch?v=vx2u5uUu3DE"},
+    {"category": "rock", "title": "Seven Nation Army", "url": "https://www.youtube.com/watch?v=0J2QdDbelmY"},
+    {"category": "rock", "title": "Viva La Vida", "url": "https://www.youtube.com/watch?v=dvgZkm1xWPE"}
+];
+// Task 1.3 Continues
+
+// Task 1.3 Continues
+await musicListModel.insertMany(exampleMusicList);
+// Task 1.3 Ends here
+
+// Task 2.1 Starts here
+const result = await musicModel.findByIdAndDelete(id);
+// Task 2.1 Ends here
+
+// Task 2.2 Starts here
+app.route("/music").get(async (req, res) => {
+    let music = [];
+    try{
+      music = await musicModel.find({});
+      res.status(201).json(music);
+    } catch(err) {
+      res.status(500).send("Server Error. Request could not be fulfilled.");
+    }
+});
+// Task 2.2 Ends here
+
+// Task 3.1 Starts here
+deleteMusic(id: string) {
+    return this.http.delete(`${this.apiurl}/music/${id}`);
+  }
+  // Task 3.1 Ends here
+
+  // Task 3.2 Starts here
+  deleteMusic(music: Music) {
+    this.musicListService.deleteMusic(music._id!)
+      .subscribe(() => {
+        this.updateMusicList();
+      });
+    }
+  // Task 3.2 Ends here
+
+  <!-- Task 3.3 Starts here -->
+  <button mat-icon-button (click)="deleteMusic(element)" color="primary">
+  <!-- Task 3.3 Ends here -->
+
+//Task 4
+  "main": "main.js",
+  "scripts": {
+    "build": "npx parcel build index.js"
+  },
+//Backend
+  npm run build
+//Frontend
+  ng build
